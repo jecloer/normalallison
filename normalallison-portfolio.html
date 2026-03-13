@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>normalallison — antifluencer. mom. kcmo.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;1,8..60,300;1,8..60,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #2C2418;
+      --near-black: #3D3020;
+      --off-white: #F5EFE2;
+      --newsprint: #EDE4D0;
+      --linen: #F0E8D5;
+      --red: #C4623A;
+      --muted-red: #A84E2A;
+      --gray: #8A7D6A;
+      --light-gray: #C8BAA2;
+      --ink: #3A2F22;
+      --sage: #6B8C68;
+      --mustard: #C89840;
+      --blush: #C49070;
+      --stripe1: #6B8C68;
+      --stripe2: #C4623A;
+      --stripe3: #C89840;
+      --stripe4: #C49070;
+      --stripe5: #8FA888;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--linen);
+      color: var(--ink);
+      font-family: 'Source Serif 4', Georgia, serif;
+      overflow-x: hidden;
+    }
+
+    body::after {
+      content: '';
+      position: fixed; inset: 0;
+      pointer-events: none; z-index: 1000;
+      opacity: 0.032;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 180px 180px;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+      background: #1E1608;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2.5rem;
+      height: 48px;
+      border-bottom: 3px solid var(--mustard);
+    }
+    .nav-wordmark {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.3rem;
+      color: var(--off-white);
+      letter-spacing: 0.05em;
+    }
+    .nav-wordmark span { color: var(--mustard); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-family: 'Source Serif 4', serif;
+      font-size: 0.72rem;
+      font-style: italic;
+      color: var(--light-gray);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      transition: color 0.15s;
+    }
+    .nav-links a:hover { color: var(--red); }
+    .nav-tag {
+      font-size: 0.65rem;
+      font-family: 'Source Serif 4', serif;
+      color: var(--gray);
+      letter-spacing: 0.1em;
+      font-style: italic;
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      background: #1E1608;
+      display: flex; flex-direction: column;
+      justify-content: flex-end;
+      padding: 8rem 2.5rem 3.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 39px,
+        rgba(245,200,140,0.05) 39px,
+        rgba(245,200,140,0.05) 40px
+      );
+      pointer-events: none;
+    }
+    .hero-kicker {
+      font-family: 'Source Serif 4', serif;
+      font-size: 0.72rem;
+      font-style: italic;
+      color: var(--mustard);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+      display: flex; align-items: center; gap: 0.8rem;
+      opacity: 0; animation: fadeIn 0.6s 0.2s ease forwards;
+    }
+    .hero-kicker::before {
+      content: '';
+      display: block; width: 2.5rem; height: 1px;
+      background: var(--mustard);
+    }
+    .hero-headline {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(5rem, 14vw, 13rem);
+      line-height: 0.88;
+      color: var(--off-white);
+      letter-spacing: 0.01em;
+      margin-bottom: 2rem;
+      opacity: 0; animation: fadeIn 0.7s 0.35s ease forwards;
+    }
+    .hero-headline .red { color: var(--red); }
+    .hero-headline .outline {
+      -webkit-text-stroke: 1px rgba(242,237,228,0.35);
+      color: transparent;
+    }
+    .hero-bottom {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 2rem;
+      opacity: 0; animation: fadeIn 0.6s 0.55s ease forwards;
+    }
+    .hero-desc {
+      font-size: 1rem;
+      line-height: 1.75;
+      color: var(--light-gray);
+      font-style: italic;
+      max-width: 480px;
+    }
+    .hero-desc strong { color: var(--off-white); font-style: normal; font-weight: 400; }
+    .hero-meta {
+      display: flex; flex-direction: column;
+      justify-content: flex-end; align-items: flex-end;
+      gap: 0.5rem;
+    }
+    .hero-meta-item {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.9rem;
+      letter-spacing: 0.1em;
+      color: var(--gray);
+    }
+    .hero-meta-item span { color: var(--mustard); margin-right: 0.5rem; }
+
+    /* MANIFESTO STRIP */
+    .manifesto {
+      background: linear-gradient(135deg, #3D2A18 0%, #5A3520 50%, #3A2A18 100%);
+      border-top: 4px solid var(--mustard);
+      border-bottom: 4px solid var(--sage);
+      padding: 3.5rem 2.5rem;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+    .manifesto-label {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1rem;
+      letter-spacing: 0.2em;
+      color: rgba(255,255,255,0.45);
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+    }
+    .manifesto-text {
+      font-family: 'Libre Baskerville', Georgia, serif;
+      font-size: clamp(1.2rem, 2.3vw, 1.9rem);
+      font-style: italic;
+      color: var(--off-white);
+      line-height: 1.55;
+    }
+    .manifesto-text strong {
+      font-style: normal;
+      border-bottom: 2px solid rgba(255,255,255,0.4);
+    }
+
+    /* SHARED SECTION */
+    section { padding: 5rem 2.5rem; }
+
+    .section-rule {
+      display: flex; align-items: center; gap: 1rem;
+      margin-bottom: 3rem;
+    }
+    .section-rule::before {
+      content: ''; display: block;
+      height: 2px; width: 3rem;
+      background: var(--mustard);
+    }
+    .section-rule-label {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.2em;
+      color: var(--mustard);
+    }
+    .section-rule::after {
+      content: ''; flex: 1;
+      height: 1px; background: var(--light-gray);
+    }
+
+    h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.8rem, 5vw, 4.5rem);
+      line-height: 0.95;
+      color: var(--black);
+      letter-spacing: 0.02em;
+      margin-bottom: 2.5rem;
+    }
+    h2 em {
+      font-family: 'Libre Baskerville', serif;
+      font-style: italic;
+      color: var(--sage);
+      font-size: 0.85em;
+    }
+
+    /* ABOUT */
+    .about {
+      background: var(--linen);
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 5rem;
+      align-items: start;
+    }
+    .about-body {
+      font-size: 1.05rem;
+      line-height: 1.85;
+      color: var(--ink);
+    }
+    .about-body p + p { margin-top: 1.4rem; }
+    .about-body strong { font-weight: 700; color: var(--black); }
+    .about-pull {
+      margin: 2.5rem 0;
+      border-left: 4px solid var(--sage);
+      padding: 0.5rem 0 0.5rem 1.5rem;
+      font-family: 'Libre Baskerville', serif;
+      font-style: italic;
+      font-size: 1.3rem;
+      line-height: 1.5;
+      color: var(--near-black);
+    }
+    .about-values { margin-top: 1rem; }
+    .value-item {
+      padding: 1.4rem 0;
+      border-bottom: 1px solid var(--light-gray);
+      display: grid;
+      grid-template-columns: 2rem 1fr;
+      gap: 1rem;
+      align-items: start;
+    }
+    .value-item:first-child { border-top: 1px solid var(--light-gray); }
+    .value-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1rem;
+      color: var(--red);
+      padding-top: 2px;
+    }
+    .value-content h3 {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--black);
+      margin-bottom: 0.35rem;
+    }
+    .value-content p {
+      font-size: 0.88rem;
+      line-height: 1.65;
+      color: var(--gray);
+    }
+
+    /* CONTENT SECTION */
+    .content-section {}
+    .content-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 1.5rem;
+    }
+    .content-card {
+      background: #281E10;
+      color: var(--off-white);
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.25s ease;
+    }
+    .content-card:hover { transform: translateY(-3px); }
+    .content-card::before {
+      content: attr(data-num);
+      position: absolute;
+      top: -0.5rem; right: 1rem;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 6rem;
+      color: rgba(255,255,255,0.04);
+      line-height: 1;
+      pointer-events: none;
+    }
+    .content-card.large { grid-column: span 7; }
+    .content-card.medium { grid-column: span 5; }
+    .content-card.wide {
+      grid-column: span 12;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 2rem; align-items: center;
+    }
+    .content-card.third { grid-column: span 4; }
+    .card-tag {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      color: var(--mustard);
+      margin-bottom: 1rem;
+    }
+    .content-card h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      line-height: 0.95;
+      letter-spacing: 0.02em;
+      color: var(--off-white);
+      margin-bottom: 1rem;
+    }
+    .content-card p {
+      font-size: 0.9rem;
+      line-height: 1.7;
+      color: var(--light-gray);
+    }
+    .content-card.inverted { background: var(--off-white); }
+    .content-card.inverted h3 { color: var(--black); }
+    .content-card.inverted p { color: var(--gray); }
+    .content-card.inverted .card-tag { color: var(--red); }
+    .content-card.red-card { background: var(--sage); }
+    .content-card.red-card h3 { color: #fff; }
+    .content-card.red-card p { color: rgba(255,255,255,0.85); }
+    .content-card.red-card .card-tag { color: rgba(255,255,255,0.6); }
+
+    /* IMPACT */
+    .impact { background: #1E1608; color: var(--off-white); }
+    .impact h2 { color: var(--off-white); }
+    .impact .section-rule-label { color: var(--mustard); }
+    .impact .section-rule::before { background: var(--mustard); }
+    .impact .section-rule::after { background: rgba(255,255,255,0.14); }
+    .impact-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border: 1px solid rgba(245,200,140,0.18);
+    }
+    .impact-item {
+      padding: 2.5rem 2rem;
+      border-right: 1px solid rgba(245,200,140,0.18);
+    }
+    .impact-item:last-child { border-right: none; }
+    .impact-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3.5rem;
+      color: var(--mustard);
+      line-height: 1;
+      margin-bottom: 0.3rem;
+    }
+    .impact-label {
+      font-size: 0.8rem;
+      color: var(--light-gray);
+      font-style: italic;
+      line-height: 1.5;
+    }
+    .impact-note {
+      font-size: 0.68rem;
+      color: var(--gray);
+      margin-top: 0.4rem;
+      letter-spacing: 0.04em;
+    }
+    .impact-statement {
+      margin-top: 3rem;
+      border-top: 1px solid rgba(245,200,140,0.18);
+      padding-top: 3rem;
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 3rem;
+      align-items: center;
+    }
+    .impact-statement-label {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1rem;
+      letter-spacing: 0.15em;
+      color: var(--gray);
+    }
+    .impact-statement-text {
+      font-family: 'Libre Baskerville', serif;
+      font-style: italic;
+      font-size: 1.12rem;
+      line-height: 1.65;
+      color: var(--off-white);
+    }
+    .impact-statement-text strong { font-style: normal; color: var(--mustard); }
+
+    /* CAUSES */
+    .causes-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border: 2px solid var(--light-gray);
+    }
+    .cause-item {
+      padding: 2rem;
+      border-right: 1px solid var(--light-gray);
+      border-bottom: 1px solid var(--light-gray);
+      transition: background 0.2s;
+    }
+    .cause-item:nth-child(even) { border-right: none; }
+    .cause-item:nth-last-child(-n+2) { border-bottom: none; }
+    .cause-item:hover { background: #281E10; }
+    .cause-item:hover .cause-title { color: var(--off-white); }
+    .cause-item:hover .cause-desc { color: var(--light-gray); }
+    .cause-mark {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem;
+      color: var(--sage);
+      margin-bottom: 0.6rem;
+    }
+    .cause-title {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--black);
+      margin-bottom: 0.5rem;
+      transition: color 0.2s;
+    }
+    .cause-desc {
+      font-size: 0.88rem;
+      line-height: 1.65;
+      color: var(--gray);
+      transition: color 0.2s;
+    }
+
+    /* CONNECT */
+    .connect { background: #281E10; }
+    .connect h2 { color: var(--off-white); }
+    .connect .section-rule-label { color: var(--mustard); }
+    .connect .section-rule::before { background: var(--mustard); }
+    .connect .section-rule::after { background: rgba(255,255,255,0.12); }
+    .connect-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .connect-text {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: var(--light-gray);
+      font-style: italic;
+    }
+    .connect-text p + p { margin-top: 1.2rem; }
+    .connect-text strong { color: var(--off-white); font-style: normal; }
+    .connect-links { display: flex; flex-direction: column; }
+    .connect-link {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.4rem 1.6rem;
+      border: 1px solid rgba(245,200,140,0.15);
+      border-bottom: none;
+      text-decoration: none;
+      color: var(--off-white);
+      transition: background 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .connect-link:last-child { border-bottom: 1px solid rgba(245,200,140,0.15); }
+    .connect-link::before {
+      content: '';
+      position: absolute; left: 0; top: 0; bottom: 0;
+      width: 0; background: var(--mustard);
+      transition: width 0.25s ease;
+    }
+    .connect-link:hover::before { width: 4px; }
+    .connect-link:hover { background: rgba(255,255,255,0.04); }
+    .connect-link-left {
+      display: flex; flex-direction: column; gap: 0.2rem;
+      position: relative; z-index: 1;
+    }
+    .connect-link-platform {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      color: var(--gray);
+    }
+    .connect-link-handle {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 1.1rem;
+      font-style: italic;
+    }
+    .connect-link-arrow {
+      font-size: 1rem;
+      color: var(--red);
+      position: relative; z-index: 1;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #1E1608;
+      padding: 2rem 2.5rem;
+      display: flex; align-items: center; justify-content: space-between;
+      border-top: 3px solid var(--mustard);
+    }
+    .footer-wordmark {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem;
+      color: var(--off-white);
+      letter-spacing: 0.06em;
+    }
+    .footer-wordmark span { color: var(--mustard); }
+    .footer-note {
+      font-size: 0.78rem;
+      font-style: italic;
+      color: var(--gray);
+    }
+    .footer-location {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.18em;
+      color: var(--gray);
+    }
+
+
+
+    /* FEED SECTION */
+    .feed { background: var(--newsprint); }
+    .feed h2 { color: var(--black); }
+    .feed .section-rule-label { color: var(--mustard); }
+    .feed .section-rule::before { background: var(--mustard); }
+    .feed .section-rule::after { background: var(--light-gray); }
+    .feed-intro {
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--gray);
+      max-width: 560px;
+      line-height: 1.75;
+      margin-bottom: 3rem;
+    }
+    .feed-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+      align-items: start;
+    }
+    .feed-embed-wrap {
+      background: var(--off-white);
+      border-radius: 2px;
+      overflow: hidden;
+      border: 1px solid var(--light-gray);
+    }
+    .feed-embed-wrap .threads-embed {
+      margin: 0 !important;
+    }
+    .feed-more {
+      margin-top: 2.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .feed-more a {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.9rem;
+      letter-spacing: 0.15em;
+      color: var(--mustard);
+      text-decoration: none;
+      border-bottom: 1px solid var(--mustard);
+      padding-bottom: 2px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .feed-more a:hover { color: var(--red); border-color: var(--red); }
+    .feed-more::before {
+      content: ''; display: block;
+      width: 2rem; height: 1px;
+      background: var(--mustard);
+    }
+
+    /* RAINBOW STRIPE — pulled from reference image */
+    .stripe-bar {
+      height: 14px;
+      background: linear-gradient(
+        to right,
+        #6B8C68 0%, #6B8C68 20%,
+        #C4623A 20%, #C4623A 40%,
+        #C89840 40%, #C89840 60%,
+        #C49070 60%, #C49070 80%,
+        #8FA888 80%, #8FA888 100%
+      );
+    }
+    .hero-stripe {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 6px;
+      background: linear-gradient(
+        to right,
+        #6B8C68, #C4623A, #C89840, #C49070, #8FA888
+      );
+    }
+
+    /* ANIMATIONS */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .reveal {
+      opacity: 0; transform: translateY(20px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      nav { padding: 0 1.2rem; }
+      .nav-tag, .nav-links { display: none; }
+      .hero { padding: 7rem 1.5rem 3rem; }
+      .hero-bottom { grid-template-columns: 1fr; gap: 1.5rem; }
+      .hero-meta { align-items: flex-start; }
+      .manifesto { grid-template-columns: 1fr; }
+      .manifesto-label { writing-mode: horizontal-tb; transform: none; }
+      .about { grid-template-columns: 1fr; gap: 2.5rem; padding: 3rem 1.5rem; }
+      .content-card.large,
+      .content-card.medium,
+      .content-card.wide,
+      .content-card.third { grid-column: span 12; }
+      .content-card.wide { grid-template-columns: 1fr; }
+      .impact-grid { grid-template-columns: 1fr; }
+      .impact-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); }
+      .impact-statement { grid-template-columns: 1fr; }
+      .causes-list { grid-template-columns: 1fr; }
+      .cause-item { border-right: none !important; }
+      .cause-item:nth-last-child(-n+2) { border-bottom: 1px solid var(--black); }
+      .cause-item:last-child { border-bottom: none; }
+      .connect-inner { grid-template-columns: 1fr; }
+      section { padding: 3.5rem 1.5rem; }
+      footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-wordmark">normal<span>allison</span></div>
+    <ul class="nav-links">
+      <li><a href="#about">who i am</a></li>
+      <li><a href="#content">what i make</a></li>
+      <li><a href="#impact">impact</a></li>
+      <li><a href="#causes">causes</a></li>
+      <li><a href="#feed">the feed</a></li>
+      <li><a href="#connect">connect</a></li>
+    </ul>
+    <div class="nav-tag">antifluencer · kcmo</div>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-stripe"></div>
+    <div class="hero-kicker">Kansas City, MO &nbsp;·&nbsp; antifluencer &nbsp;·&nbsp; @normalallison</div>
+    <div class="hero-headline">
+      NOT<br>
+      <span class="outline">YOUR</span><br>
+      <span class="red">INFLU</span>ENCER
+    </div>
+    <div class="hero-bottom">
+      <p class="hero-desc">
+        I'm Allison. A mom, an editor, a Kansas City resident. I use social media to tell the truth —
+        about my life, about this city, about the systems that are failing the people I love.
+        <strong>No curation. No quiet. No pretending.</strong>
+      </p>
+      <div class="hero-meta">
+        <div class="hero-meta-item"><span>↗</span> Instagram: @normalallison</div>
+        <div class="hero-meta-item"><span>↗</span> TikTok: @normalallison</div>
+        <div class="hero-meta-item"><span>◈</span> KCMO · Antifluencer · Antifa Mom</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MANIFESTO -->
+  <div class="manifesto">
+    <div class="manifesto-label">MANIFESTO</div>
+    <div class="manifesto-text">
+      "The goal was never followers. It was <strong>community</strong>.
+      The point was never perfection. It was <strong>truth</strong>.
+      I don't want to sell you anything —
+      I want to show up for the people whose existence is under threat
+      and <strong>refuse to be quiet about it.</strong>"
+    </div>
+  </div>
+
+  <div class="stripe-bar"></div>
+
+  <!-- ABOUT -->
+  <section id="about" class="about">
+    <div>
+      <div class="section-rule reveal"><div class="section-rule-label">About</div></div>
+      <h2 class="reveal">Ordinary <em>life,</em><br>radical <em>honesty.</em></h2>
+      <div class="about-body reveal">
+        <p>
+          I'm a <strong>Kansas City-based mom, editor, and everyday activist</strong> — and I've built my
+          online presence deliberately outside the rules of traditional influencing.
+          There are no brand deals here. No sponsored content dressed up as real life.
+          What you see is what's actually happening.
+        </p>
+        <div class="about-pull">
+          "I called myself an antifluencer because I needed a word for what I actually am —
+          someone who uses this platform to resist, not to sell."
+        </div>
+        <p>
+          My content lives at the intersection of <strong>motherhood and resistance.</strong>
+          I'm raising kids in a world that is actively hostile to many of the people we love,
+          and I refuse to let that be invisible. Every post is a small act of showing up —
+          for my community, my city, my conscience.
+        </p>
+        <p>
+          As an <strong>editor and KCMO resident</strong>, I bring a writer's eye for accountability
+          to local issues that too often go unnoticed. Kansas City is my beat.
+          The people here are my reason.
+        </p>
+      </div>
+    </div>
+    <div>
+      <div class="section-rule reveal"><div class="section-rule-label">Core Values</div></div>
+      <div class="about-values">
+        <div class="value-item reveal">
+          <div class="value-num">01</div>
+          <div class="value-content">
+            <h3>Authenticity over Aesthetics</h3>
+            <p>Deliberately unpolished. Candid, naturally lit, real-life. The message matters more than the lighting.</p>
+          </div>
+        </div>
+        <div class="value-item reveal">
+          <div class="value-num">02</div>
+          <div class="value-content">
+            <h3>Community over Consumerism</h3>
+            <p>This platform exists to strengthen community, not monetize it. Trust is sacred and not for sale.</p>
+          </div>
+        </div>
+        <div class="value-item reveal">
+          <div class="value-num">03</div>
+          <div class="value-content">
+            <h3>Raising Resisters</h3>
+            <p>Parenting through a lens of resistance — raising children to see the world clearly and act on what they see.</p>
+          </div>
+        </div>
+        <div class="value-item reveal">
+          <div class="value-num">04</div>
+          <div class="value-content">
+            <h3>Local Accountability</h3>
+            <p>Kansas City isn't a backdrop — it's the subject. Local government, local people, local stakes.</p>
+          </div>
+        </div>
+        <div class="value-item reveal">
+          <div class="value-num">05</div>
+          <div class="value-content">
+            <h3>Righteous Rage + Radical Love</h3>
+            <p>Anger at systems. Tenderness for people. Both coexist. Neither gets apologized for.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT I MAKE -->
+  <section id="content">
+    <div class="section-rule reveal"><div class="section-rule-label">What I Make</div></div>
+    <h2 class="reveal">Content that <em>means</em><br>something.</h2>
+    <div class="content-grid">
+      <div class="content-card large reveal" data-num="1">
+        <div class="card-tag">Everyday Activism</div>
+        <h3>THE MUNDANE<br>IS POLITICAL</h3>
+        <p>Morning coffee. School drop-off. Grocery runs. I document the ordinary without letting you forget the extraordinary stakes underneath — because activism isn't only rallies. It's every single day.</p>
+      </div>
+      <div class="content-card medium red-card reveal" data-num="2">
+        <div class="card-tag">Motherhood &amp; Resistance</div>
+        <h3>RAISING KIDS<br>WHO GIVE A DAMN</h3>
+        <p>What does it mean to parent with intention in a broken system? I talk about that — honestly, imperfectly, in real time.</p>
+      </div>
+      <div class="content-card third inverted reveal" data-num="3">
+        <div class="card-tag">Trans Rights &amp; Queer Solidarity</div>
+        <h3>SHOWING UP<br>FOR COMMUNITY</h3>
+        <p>Amplifying trans voices. Protecting queer friends and family. Naming the threats. Refusing silence.</p>
+      </div>
+      <div class="content-card third reveal" data-num="4">
+        <div class="card-tag">Local KCMO</div>
+        <h3>KANSAS CITY<br>IS MY BEAT</h3>
+        <p>Local government accountability. Regional issues. The stories that don't trend nationally but matter here every single day.</p>
+      </div>
+      <div class="content-card third reveal" data-num="5">
+        <div class="card-tag">Anti-Patriarchy</div>
+        <h3>DISMANTLING<br>THE DEFAULT</h3>
+        <p>Direct, unflinching commentary on patriarchal structures — in policy, in culture, and in the DMs I get on a Tuesday.</p>
+      </div>
+      <div class="content-card wide reveal" data-num="6">
+        <div>
+          <div class="card-tag">The Antifluencer Ethos</div>
+          <h3>WHAT THIS<br>ISN'T</h3>
+        </div>
+        <p style="color:var(--light-gray);font-size:0.95rem;line-height:1.8;">
+          No perfectly lit flat lays. No "gifted" product reviews. No curated beige aesthetics. No quiet on the hard things. No pretending a political crisis is a minor inconvenience. No performing wellness while people are suffering. What you get instead: real life, real opinions, real stakes — and a Kansas City mom who isn't going to shut up about any of it.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- IMPACT -->
+  <section id="impact" class="impact">
+    <div class="section-rule reveal"><div class="section-rule-label">Community Impact</div></div>
+    <h2 class="reveal">Not just reach.<br><em>Real connection.</em></h2>
+    <div class="impact-grid">
+      <div class="impact-item reveal">
+        <div class="impact-num">6.2%</div>
+        <div class="impact-label">Average engagement rate — nearly 3× the industry standard for this audience size</div>
+        <div class="impact-note">vs. ~2% platform average</div>
+      </div>
+      <div class="impact-item reveal">
+        <div class="impact-num">84K+</div>
+        <div class="impact-label">Monthly impressions across TikTok and Instagram</div>
+        <div class="impact-note">organic reach, no paid amplification</div>
+      </div>
+      <div class="impact-item reveal">
+        <div class="impact-num">30K+</div>
+        <div class="impact-label">Combined followers across platforms — built on trust, not trends</div>
+        <div class="impact-note">instagram · tiktok · @normalallison</div>
+      </div>
+    </div>
+    <div class="impact-statement reveal">
+      <div class="impact-statement-label">Why It Matters</div>
+      <div class="impact-statement-text">
+        High engagement on a smaller platform is worth more than passive reach on a large one.
+        Allison's audience <strong>responds, shares, and acts</strong> — they show up to city hall,
+        call their representatives, and amplify the messages that need amplifying.
+        That's not an audience. That's a <strong>community</strong>.
+      </div>
+    </div>
+  </section>
+
+  <!-- CAUSES -->
+  <section id="causes">
+    <div class="section-rule reveal"><div class="section-rule-label">Causes &amp; Commitments</div></div>
+    <h2 class="reveal">What I fight <em>for.</em></h2>
+    <div class="causes-list">
+      <div class="cause-item reveal">
+        <div class="cause-mark">✦</div>
+        <div class="cause-title">Trans Rights &amp; Protection</div>
+        <p class="cause-desc">Vocal, consistent, unapologetic support for trans and non-binary people — especially when legislation targets their right to exist.</p>
+      </div>
+      <div class="cause-item reveal">
+        <div class="cause-mark">✦</div>
+        <div class="cause-title">Anti-Patriarchy &amp; Feminist Advocacy</div>
+        <p class="cause-desc">Challenging patriarchal systems in policy and culture. Not politely. Not quietly. Persistently and specifically.</p>
+      </div>
+      <div class="cause-item reveal">
+        <div class="cause-mark">✦</div>
+        <div class="cause-title">Queer &amp; LGBTQ+ Solidarity</div>
+        <p class="cause-desc">Community protection over performative allyship. Using the platform to amplify, not just acknowledge.</p>
+      </div>
+      <div class="cause-item reveal">
+        <div class="cause-mark">✦</div>
+        <div class="cause-title">Local Kansas City Accountability</div>
+        <p class="cause-desc">Holding local government responsible. Covering the regional stories that national media ignores.</p>
+      </div>
+      <div class="cause-item reveal">
+        <div class="cause-mark">✦</div>
+        <div class="cause-title">Conscious Parenting &amp; Resistance</div>
+        <p class="cause-desc">Raising children who are socially aware, empathetic, and unafraid to name injustice when they see it.</p>
+      </div>
+      <div class="cause-item reveal">
+        <div class="cause-mark">✦</div>
+        <div class="cause-title">The Antifluencer Movement</div>
+        <p class="cause-desc">Actively rejecting the commercialization of social media. Community over consumerism. Meaning over metrics.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FROM THE FEED -->
+  <section id="feed" class="feed">
+    <div class="section-rule reveal"><div class="section-rule-label">From the Feed</div></div>
+    <h2 class="reveal">In her <em>own words.</em></h2>
+    <p class="feed-intro reveal">Live from Threads — unfiltered, unscheduled, unsponsored.</p>
+    <div class="feed-grid">
+      <div class="feed-embed-wrap reveal">
+        <blockquote class="text-post-media" data-text-post-permalink="https://www.threads.com/@normalallison/post/DVDDhvglouF" data-text-post-version="0" id="ig-tp-DVDDhvglouF" style="background:#FFF; border-width:1px; border-style:solid; border-color:#00000026; border-radius:16px; max-width:540px; margin:0; min-width:270px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);"><a href="https://www.threads.com/@normalallison/post/DVDDhvglouF" style="background:#FFFFFF; line-height:0; padding:0 0; text-align:center; text-decoration:none; width:100%;" target="_blank"><div style="padding: 40px; text-align:center; color:#000; font-family:Arial,sans-serif; font-size:14px;">View post on Threads</div></a></blockquote>
+      </div>
+    </div>
+    <div class="feed-more reveal">
+      <a href="https://www.threads.com/@normalallison" target="_blank">See everything on Threads ↗</a>
+    </div>
+  </section>
+
+  <div class="stripe-bar"></div>
+
+  <!-- CONNECT -->
+  <section id="connect" class="connect">
+    <div class="section-rule reveal"><div class="section-rule-label">Connect</div></div>
+    <h2 class="reveal">Find me where<br><em>it's happening.</em></h2>
+    <div class="connect-inner">
+      <div class="connect-text reveal">
+        <p>
+          I'm not here for brand deals. But I am here for <strong>genuine collaboration</strong> —
+          with journalists, community organizers, local advocates, educators, and anyone else
+          doing real work in Kansas City and beyond.
+        </p>
+        <p>
+          If you have a story that needs telling, a cause that needs a megaphone,
+          or a project that aligns with the values above —
+          <strong>I want to hear from you.</strong>
+        </p>
+        <p>
+          If you're a brand looking for a sponsored post:
+          <em>this is not the account you're looking for.</em>
+        </p>
+      </div>
+      <div class="connect-links reveal">
+        <a href="https://www.instagram.com/normalallison/" target="_blank" class="connect-link">
+          <div class="connect-link-left">
+            <div class="connect-link-platform">Instagram</div>
+            <div class="connect-link-handle">@normalallison</div>
+          </div>
+          <div class="connect-link-arrow">↗</div>
+        </a>
+        <a href="https://www.tiktok.com/@normalallison" target="_blank" class="connect-link">
+          <div class="connect-link-left">
+            <div class="connect-link-platform">TikTok</div>
+            <div class="connect-link-handle">@normalallison</div>
+          </div>
+          <div class="connect-link-arrow">↗</div>
+        </a>
+        <a href="/cdn-cgi/l/email-protection#345c5158585b745a5b465955585558585d475b5a1a575b59" class="connect-link">
+          <div class="connect-link-left">
+            <div class="connect-link-platform">Email</div>
+            <div class="connect-link-handle"><span class="__cf_email__" data-cfemail="f59d9099999ab59b9a879894999499999c869a9bdb969a98">[email&#160;protected]</span></div>
+          </div>
+          <div class="connect-link-arrow">↗</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div class="stripe-bar"></div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-wordmark">normal<span>allison</span></div>
+    <div class="footer-note">antifluencer. mom. still here.</div>
+    <div class="footer-location">KANSAS CITY, MO</div>
+  </footer>
+
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    const reveals = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entr
